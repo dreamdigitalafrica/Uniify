@@ -1,0 +1,11 @@
+/* Color-only override. Original template geometry, typography and content retained. */
+:root {
+ --theme-color1: #9560ed;
+ --theme-color1-rgb: 149, 96, 237;
+ --theme-color3: #ba93f6;
+ --theme-color3-rgb: 186, 147, 246;
+ --gradient-1: linear-gradient(180deg, rgba(24,24,24,0) 0%, #9560ed 100%);
+}
+/* Recolor the original warm-toned decorative artwork without changing its size. */
+.banner-section .bg-banner-img {filter:grayscale(1) sepia(1) hue-rotate(210deg) saturate(3)}
+.banner-section .banner-overlay {background:radial-gradient(circle at 30% 50%,rgba(149,96,237,.35),transparent 60%)}
