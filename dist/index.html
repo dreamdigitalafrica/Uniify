@@ -12,17 +12,13 @@
 <!-- Responsive -->
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="Your music. Your next move. Uniify helps independent artists assess their foundations, plan next steps, and track progress." name="description"/><link href="css/purple.css" rel="stylesheet"/><link href="css/uniify-content.css" rel="stylesheet"/></head>
-<body class="tm-magic-cursor">
+<meta content="Your music. Your next move. Uniify helps independent artists plan releases, adapt their roadmap, and see long-term Career Progress." name="description"/><link href="css/purple.css" rel="stylesheet"/><link href="css/experience.css" rel="stylesheet"/><link rel="stylesheet" href="css/refinement.css"><script src="js/theme-preference.js"></script></head>
+<body class="tm-magic-cursor uniify-landing">
 <div class="page-wrapper">
-<div class="preloader"></div>
+
 <!-- Back-to-top start -->
 <div class="back-to-top-wrapper">
-<button class="back-to-top-btn" id="back_to_top" type="button">
-<svg fill="none" height="7" viewbox="0 0 12 7" width="12" xmlns="http://www.w3.org/2000/svg">
-<path d="M11 6L6 1L1 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-</svg>
-</button>
+<button class="back-to-top-btn" aria-label="Back to top" id="back_to_top" type="button">Top</button>
 </div>
 <!-- Back-to-top start -->
 <!-- Main Header-->
@@ -39,18 +35,16 @@
 <!--Nav Box-->
 <div class="nav-outer">
 <nav class="nav main-menu">
-<ul class="navigation"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#features">Features</a></li><li><a href="#plan">Your plan</a></li><li><a href="#resources">Resources</a></li><li><a href="#start">Get started</a></li><li><a href="signin.html">Sign in</a></li></ul>
+<ul class="navigation"><li><a href="about.html">About</a></li><li><a href="insights.html">Insights</a></li><li><a href="signin.html">Sign in</a></li></ul>
 </nav>
 </div>
 <!-- Outer Box -->
 <div class="action-box">
-<div class="header-btn">
-<a class="theme-btn-two" href="#start">Get started <i class="fa-light fa-arrow-up-right"></i></a>
+<button class="theme-switch" data-theme-toggle aria-label="Switch color theme">Light mode</button><div class="header-btn">
+<a class="theme-btn-two" href="signup.html">Get started</a>
 </div>
 <!-- Mobile Nav toggler -->
-<div class="mobile-nav-toggler">
-<div class="shape-line-img"><i class="fas fa-bars"></i></div>
-</div>
+<button class="mobile-nav-toggler" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><i class="fas fa-bars" aria-hidden="true"></i></button>
 </div>
 </div>
 </div>
@@ -59,12 +53,12 @@
 <div class="mobile-menu">
 <div class="menu-backdrop"></div>
 <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-<nav class="menu-box">
+<nav class="menu-box" id="mobile-navigation" aria-label="Mobile navigation">
 <div class="upper-box">
 <div class="nav-logo">
 <a href="index.html"><span class="uniify-brand">uniify<span>.</span><small>FOR ARTISTS</small></span></a>
 </div>
-<div class="close-btn"><i class="icon fa fa-times"></i></div>
+<button class="close-btn" type="button" aria-label="Close navigation"><i class="icon fa fa-times" aria-hidden="true"></i></button>
 </div>
 <ul class="navigation clearfix">
 <!--Keep This Empty / Menu will come through Javascript-->
@@ -111,9 +105,9 @@
 </ul>
 </div>
 </nav>
-<!-- Main Menu End-->
+<!-- Main Menu End--><button class="theme-switch" data-theme-toggle type="button">Light mode</button>
 <!--Mobile Navigation Toggler-->
-<div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
+<button class="mobile-nav-toggler" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><span class="icon lnr-icon-bars" aria-hidden="true"></span></button>
 </div>
 </div>
 </div>
@@ -132,19 +126,19 @@
 <div class="banner-slide">
 <div class="content-box">
 <div class="inner-box">
-<h1 class="title denge-words">Your Music. Your Next Move.</h1>
+<h1 class="title denge-words">Your music.<br/>Your next move.</h1>
 <ul class="banner-service-list denge-words">
-<li><a href="workspace.html">Career assessment</a></li>
+<li><a href="workspace.html#releases">Release planning</a></li>
 <li>/</li>
 <li><a href="workspace.html">Your roadmap</a></li>
 <li>/</li>
-<li><a href="workspace.html">Release planning</a></li>
+<li><a href="workspace.html#career">Career Progress</a></li>
 <li>/</li>
 <li><a href="workspace.html">Artist identity</a></li>
 <li>/</li>
-<li><a href="workspace.html">Progress tracking</a></li>
+<li><a href="workspace.html#assessment">Career foundations</a></li>
 </ul>
-<div class="button-box denge-fade"><a class="theme-btn-three" href="workspace.html">Build your plan <i class="fa-light fa-arrow-up-right"></i></a></div>
+<div class="button-box denge-fade"><a class="theme-btn-three" href="workspace.html">Explore your workspace</a></div>
 </div>
 </div>
 <div class="bottom-box">
@@ -157,7 +151,7 @@
 <div class="logo"><a href="index.html"><span class="audience-label">Independent</span></a></div>
 </div>
 </div>
-<div class="style-text denge-chars">Unii<span>fy</span></div>
+<div class="style-text denge-chars">uni<span>ify.</span></div>
 </div>
 </div>
 </div>
@@ -176,13 +170,13 @@
 </div>
 <div class="col-lg-5">
 <div class="text denge-fade">Make sense of where you are. Decide what comes next. Uniify helps you turn your music goals into practical steps.</div>
-<a class="theme-btn-one denge-fade" href="workspace.html">Meet your workspace <i class="fa-light fa-arrow-up-right"></i></a>
+<a class="theme-btn-one denge-fade" href="workspace.html">Meet your workspace</a>
 </div>
 </div>
 </div>
 <div class="row">
 <div class="col-lg-8 col-md-6">
-<div class="image img-reveal"><img alt="Musician working at a studio mixing desk" height="480" loading="lazy" src="images/uniify/8197289.jpg" style="aspect-ratio:923/480;object-fit:cover;" width="923"/></div>
+<div class="image img-reveal"><img alt="" loading="lazy" decoding="async" src="images/artists/portrait.jpg"/></div>
 </div>
 <div class="col-lg-4 col-md-6">
 <div class="experience">
@@ -196,7 +190,6 @@
 </div>
 </div>
 </section>
-<!-- About Section -->
 <div class="section-outer">
 <!-- Services Section -->
 <section class="services-section denge-fade" id="features">
@@ -215,7 +208,7 @@
 <div class="icon"><img alt="" src="images/icons/service-icon1-1.png"/></div>
 <div class="h4 title"><a href="workspace.html">Career Assessment</a></div>
 <div class="text">See which foundations are in place and where to focus next.</div>
-<a class="service-button-one" href="workspace.html">Read More <i class="fa-light fa-arrow-right"></i></a>
+<a class="service-button-one" href="workspace.html">Read More</a>
 </div>
 </div>
 </div>
@@ -225,8 +218,8 @@
 <div class="shape1"><img alt="" src="images/icons/shape1.png"/></div>
 <div class="icon"><img alt="" src="images/icons/service-icon1-2.png"/></div>
 <div class="h4 title"><a href="workspace.html">Your Roadmap</a></div>
-<div class="text">Turn your assessment into a practical list of next steps.</div>
-<a class="service-button-one" href="workspace.html">Read More <i class="fa-light fa-arrow-right"></i></a>
+<div class="text">Plan the work behind each release. Suggested dates adapt as you take action.</div>
+<a class="service-button-one" href="workspace.html">Read More</a>
 </div>
 </div>
 </div>
@@ -237,7 +230,7 @@
 <div class="icon"><img alt="" src="images/icons/service-icon1-3.png"/></div>
 <div class="h4 title"><a href="workspace.html">Artist Workspace</a></div>
 <div class="text">Keep your profile, priorities, and progress together.</div>
-<a class="service-button-one" href="workspace.html">Read More <i class="fa-light fa-arrow-right"></i></a>
+<a class="service-button-one" href="workspace.html">Read More</a>
 </div>
 </div>
 </div>
@@ -246,9 +239,9 @@
 <div class="inner-block">
 <div class="shape1"><img alt="" src="images/icons/shape1.png"/></div>
 <div class="icon"><img alt="" src="images/icons/service-icon1-4.png"/></div>
-<div class="h4 title"><a href="workspace.html">Progress Tracking</a></div>
-<div class="text">Check off completed tasks and see what remains.</div>
-<a class="service-button-one" href="workspace.html">Read More <i class="fa-light fa-arrow-right"></i></a>
+<div class="h4 title"><a href="workspace.html">Career Progress</a></div>
+<div class="text">See your releases, engagements and outcomes across quarters and years.</div>
+<a class="service-button-one" href="workspace.html">Read More</a>
 </div>
 </div>
 </div>
@@ -259,14 +252,14 @@
 <div class="icon"><img alt="" src="images/icons/service-icon1-5.png"/></div>
 <div class="h4 title"><a href="workspace.html">Your Direction</a></div>
 <div class="text">Choose your goals. Review your plan as your career changes.</div>
-<a class="service-button-one" href="workspace.html">Read More <i class="fa-light fa-arrow-right"></i></a>
+<a class="service-button-one" href="workspace.html">Read More</a>
 </div>
 </div>
 </div>
 <div class="col-xl-4 col-md-6">
 <div class="service-contect-box">
 <div class="text">A little structure leaves more room for the music.</div>
-<a class="theme-btn-one" href="workspace.html">Open your workspace <i class="fa-light fa-arrow-up-right"></i></a>
+<a class="theme-btn-one" href="workspace.html">Open your workspace</a>
 </div>
 </div>
 </div>
@@ -280,12 +273,12 @@
 <div class="row align-items-end">
 <div class="col-xl-6">
 <div class="sub-title denge-words">Make your next move</div>
-<div class="h2 title denge-chars">Your <span>Priorities</span></div>
+<div class="h2 title denge-chars">Next <span>Steps</span></div>
 </div>
 <div class="col-xxl-3 offset-xxl-3 col-xl-4 offset-xl-2">
 <div class="button-box">
 <div class="text2 denge-words">One step at a time.</div>
-<a class="theme-btn-one denge-fade" href="workspace.html">Build your roadmap <i class="fa-light fa-arrow-up-right"></i></a>
+<a class="theme-btn-one denge-fade" href="workspace.html">Plan your release</a>
 </div>
 </div>
 </div>
@@ -294,8 +287,8 @@
 <div class="col-lg-6">
 <div class="project-block denge-fade">
 <div class="inner-block">
-<div class="icon"><a href="#plan"><i class="fa-light fa-arrow-up-right"></i></a></div>
-<div class="image"><a href="#plan"><img alt="Vocalist recording a song in a studio" height="480" loading="lazy" src="images/uniify/7087162.jpg" style="aspect-ratio:668/480;object-fit:cover;" width="668"/></a></div>
+
+<div class="image"><a href="#plan"><img alt="" loading="lazy" decoding="async" src="images/artists/dj.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/dj.jpg"/></a></div>
 <div class="content">
 <div class="h5 title"><a href="#plan">Plan Your Release</a></div>
 <div class="post-meta"><span class="date">Release</span><span class="category">Your next step</span></div>
@@ -306,8 +299,8 @@
 <div class="col-lg-6">
 <div class="project-block denge-fade">
 <div class="inner-block">
-<div class="icon"><a href="#plan"><i class="fa-light fa-arrow-up-right"></i></a></div>
-<div class="image"><a href="#plan"><img alt="Portrait from the former Uniify theme" height="480" loading="lazy" src="assets/img/c32.jpg" style="aspect-ratio:668/480;object-fit:cover;" width="668"/></a></div>
+
+<div class="image"><a href="#plan"><img alt="" loading="lazy" decoding="async" src="images/artists/guitar.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/guitar.jpg"/></a></div>
 <div class="content">
 <div class="h5 title"><a href="#plan">Define Your Identity</a></div>
 <div class="post-meta"><span class="date">Identity</span><span class="category">Your next step</span></div>
@@ -318,8 +311,8 @@
 <div class="col-lg-6">
 <div class="project-block denge-fade">
 <div class="inner-block">
-<div class="icon"><a href="#plan"><i class="fa-light fa-arrow-up-right"></i></a></div>
-<div class="image"><a href="#plan"><img alt="Audience raising their hands at a live performance" height="480" loading="lazy" src="images/uniify/1666816.jpg" style="aspect-ratio:668/480;object-fit:cover;" width="668"/></a></div>
+
+<div class="image"><a href="#plan"><img alt="" loading="lazy" decoding="async" src="images/artists/drummer.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/drummer.jpg"/></a></div>
 <div class="content">
 <div class="h5 title"><a href="#plan">Know Your Audience</a></div>
 <div class="post-meta"><span class="date">Audience</span><span class="category">Your next step</span></div>
@@ -330,8 +323,8 @@
 <div class="col-lg-6">
 <div class="project-block denge-fade">
 <div class="inner-block">
-<div class="icon"><a href="#plan"><i class="fa-light fa-arrow-up-right"></i></a></div>
-<div class="image"><a href="#plan"><img alt="Music production workspace with keyboard and monitors" height="480" loading="lazy" src="images/uniify/6577455.jpg" style="aspect-ratio:668/480;object-fit:cover;" width="668"/></a></div>
+
+<div class="image"><a href="#plan"><img alt="" loading="lazy" decoding="async" src="images/artists/mixing.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/mixing.jpg"/></a></div>
 <div class="content">
 <div class="h5 title"><a href="#plan">Build Your Routine</a></div>
 <div class="post-meta"><span class="date">Routine</span><span class="category">Your next step</span></div>
@@ -353,7 +346,7 @@
 <div class="service-block-seven denge-fade">
 <div class="inner-block">
 <div class="image-box">
-<div class="image"><img alt="Singer and engineer recording together" height="1440" loading="lazy" src="images/uniify/8133004.jpg" style="aspect-ratio:1920/1440;object-fit:cover;" width="1920"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/portrait.jpg"/></div>
 </div>
 <div class="icon"><img alt="" src="images/icons/service-icon7-1.png"/></div>
 <div class="content">
@@ -367,7 +360,7 @@
 <div class="service-block-eight">
 <div class="inner-block">
 <div class="image-box">
-<div class="image"><img alt="Musicians rehearsing together" height="4096" loading="lazy" src="images/uniify/8827042.jpg" style="aspect-ratio:2731/4096;object-fit:cover;" width="2731"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/dj.jpg"/></div>
 </div>
 <div class="icon"><img alt="" src="images/icons/service-icon8-1.png"/></div>
 <div class="content">
@@ -381,18 +374,18 @@
 <div class="service-block-four">
 <div class="inner-block">
 <div class="image-box">
-<div class="image"><img alt="Producer listening to a mix on headphones" height="1282" loading="lazy" src="images/uniify/8132462.jpg" style="aspect-ratio:1920/1282;object-fit:cover;" width="1920"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/guitar.jpg"/></div>
 </div>
 <div class="icon"><img alt="" src="images/icons/service-icon4-1.png"/></div>
 <div class="h4 title"><a href="workspace.html">Find Your Focus</a></div>
-<div class="text">Use your assessment to decide what deserves attention first.</div>
+<div class="text">Create a release and give your next project a goal, date and connected plan.</div>
 </div>
 </div>
 </div>
 <div class="col-xl-4 col-lg-6">
 <div class="service-block-three">
 <div class="inner-block">
-<div class="image"><img alt="Vocalist performing into a studio microphone" height="1280" loading="lazy" src="images/uniify/7586265.jpg" style="aspect-ratio:1920/1280;object-fit:cover;" width="1920"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/listener.jpg"/></div>
 <div class="icon"><img alt="" src="images/icons/service-icon3-1.png"/></div>
 <div class="h4 title"><a href="workspace.html">Make Time for Music</a></div>
 <div class="text">Bring your next task into the time you have this week.</div>
@@ -403,7 +396,7 @@
 <div class="service-block-five">
 <div class="inner-block">
 <div class="image-box">
-<div class="image"><img alt="Songwriter making notes beside a guitar" height="1280" loading="lazy" src="images/uniify/7573175.jpg" style="aspect-ratio:1920/1280;object-fit:cover;" width="1920"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/drums.jpg"/></div>
 </div>
 <div class="icon"><img alt="" src="images/icons/service-icon5-1.png"/></div>
 <div class="h4 title"><a href="workspace.html">Keep Moving Forward</a></div>
@@ -426,7 +419,7 @@
 <div class="h2 title text-reveal-anim">A Clear Plan. <br/>Your Own Pace. <img alt="" class="arrow-shape" src="images/icons/arrow-shape2.png"/></div>
 </div>
 <div class="col-lg-5">
-<div class="text denge-fade">Start with your foundations. Build a habit you can keep.</div>
+<div class="text denge-fade">Start with a release. Follow its roadmap. See your career grow over time.</div>
 </div>
 </div>
 </div>
@@ -447,16 +440,16 @@
 <div class="col-xl-4 col-lg-6">
 <div class="pricing-block denge-fade">
 <div class="inner-box">
-<div class="price"><span>Profile</span></div>
-<div class="tag">Tell your story</div>
+<div class="price"><span>Release</span></div>
+<div class="tag">Define what you’re building</div>
 <ul class="list">
-<li>Artist name and role<img alt="" src="images/icons/check1.png"/></li>
-<li>Your career stage<img alt="" src="images/icons/check1.png"/></li>
-<li>Your main goal<img alt="" src="images/icons/check1.png"/></li>
-<li>Time and budget<img alt="" src="images/icons/check1.png"/></li>
-<li>Your biggest challenge<img alt="" src="images/icons/check1.png"/></li>
+<li>Your release goal<img alt="" src="images/icons/check1.png"/></li>
+<li>Single, EP or album<img alt="" src="images/icons/check1.png"/></li>
+<li>Target release date<img alt="" src="images/icons/check1.png"/></li>
+<li>Budget and milestones<img alt="" src="images/icons/check1.png"/></li>
+<li>Your linked roadmap<img alt="" src="images/icons/check1.png"/></li>
 </ul>
-<button class="get-started" onclick="location.href='workspace.html'" type="button">Open workspace</button>
+<button class="get-started" onclick="location.href='workspace.html#releases'" type="button">Open workspace</button>
 </div>
 </div>
 </div>
@@ -464,32 +457,32 @@
 <div class="pricing-block denge-fade style-2">
 <div class="h5 recommend">Your next step</div>
 <div class="inner-box active">
-<div class="price"><span>Assess</span></div>
-<div class="tag">Check your foundations</div>
+<div class="price"><span>Roadmap</span></div>
+<div class="tag">Turn your release into action</div>
 <ul class="list">
-<li>Release planning<img alt="" src="images/icons/check1.png"/></li>
-<li>Rights and credits<img alt="" src="images/icons/check1.png"/></li>
-<li>Artist identity<img alt="" src="images/icons/check1.png"/></li>
-<li>Audience habits<img alt="" src="images/icons/check1.png"/></li>
-<li>Money and goals<img alt="" src="images/icons/check1.png"/></li>
+<li>Five connected phases<img alt="" src="images/icons/check1.png"/></li>
+<li>Your weekly availability<img alt="" src="images/icons/check1.png"/></li>
+<li>Protected personal dates<img alt="" src="images/icons/check1.png"/></li>
+<li>Adaptive next steps<img alt="" src="images/icons/check1.png"/></li>
+<li>Changes you can undo<img alt="" src="images/icons/check1.png"/></li>
 </ul>
-<button class="get-started" onclick="location.href='workspace.html'" type="button">Open workspace</button>
+<button class="get-started" onclick="location.href='workspace.html#roadmap'" type="button">Open workspace</button>
 </div>
 </div>
 </div>
 <div class="col-xl-4 col-lg-6">
 <div class="pricing-block denge-fade">
 <div class="inner-box">
-<div class="price"><span>Plan</span></div>
-<div class="tag">Choose your next move</div>
+<div class="price"><span>Progress</span></div>
+<div class="tag">See the whole picture</div>
 <ul class="list">
-<li>Review your next steps<img alt="" src="images/icons/check1.png"/></li>
-<li>Pick a starting point<img alt="" src="images/icons/check1.png"/></li>
-<li>Make time this week<img alt="" src="images/icons/check1.png"/></li>
-<li>Complete one task<img alt="" src="images/icons/check1.png"/></li>
-<li>Save your progress<img alt="" src="images/icons/check1.png"/></li>
+<li>Quarterly and yearly views<img alt="" src="images/icons/check1.png"/></li>
+<li>Releases and milestones<img alt="" src="images/icons/check1.png"/></li>
+<li>Gigs and collaborations<img alt="" src="images/icons/check1.png"/></li>
+<li>Audience observations<img alt="" src="images/icons/check1.png"/></li>
+<li>Income and expenses<img alt="" src="images/icons/check1.png"/></li>
 </ul>
-<button class="get-started" onclick="location.href='workspace.html'" type="button">Open workspace</button>
+<button class="get-started" onclick="location.href='workspace.html#career'" type="button">Open workspace</button>
 </div>
 </div>
 </div>
@@ -560,9 +553,8 @@
 <div class="outer-box">
 <div class="video-text denge-chars">Your music</div>
 <div class="video-box">
-<div class="video-img img-reveal"><img alt="A live music audience reaching towards the stage" height="208" loading="lazy" src="images/uniify/976866.jpg" style="aspect-ratio:438/208;object-fit:cover;" width="438"/></div>
+<div class="video-img img-reveal"><img alt="" loading="lazy" decoding="async" src="images/artists/listener.jpg"/></div>
 <a aria-label="Open your artist workspace" class="play-now2" data-caption="" href="workspace.html">
-<i class="fa-solid fa-arrow-up-right"></i>
 <span class="ripple"></span>
 </a>
 </div>
@@ -606,7 +598,7 @@
 <div class="acc-btn active">How is my roadmap created?<div class="icon fal fa-plus"></div></div>
 <div class="acc-content current">
 <div class="content">
-<div class="text">Your answers highlight gaps and suggest practical tasks. You decide what to work on next.</div>
+<div class="text">Create a release to generate preparation, production, delivery, promotion and review tasks. Completing actions or changing availability adjusts unfinished suggested work using repeatable rules. Your chosen dates stay fixed; conflicts are flagged and automatic scheduling changes can be undone. Your assessment informs the plan without blocking a release.</div>
 </div>
 </div>
 </li>
@@ -658,7 +650,7 @@
 <div class="review-number">You</div>
 </div>
 <div class="image">
-<span class="stage-symbol">♫</span></div>
+<img src="images/artists/portrait.jpg" alt="" loading="lazy"/><img src="images/artists/dj.jpg" alt="" loading="lazy"/><img src="images/artists/drummer.jpg" alt="" loading="lazy"/></div>
 <div class="text">Your goals set the direction</div>
 </div>
 </div>
@@ -673,14 +665,14 @@
 <div class="testimonial-box">
 <div class="text">Give your first release a clear starting point. Begin with your profile, a simple goal, and the next task you can finish.</div>
 <div class="author-info">
-<div class="thumb"><span class="stage-symbol small">♪</span></div>
+<div class="thumb"><img src="images/artists/portrait.jpg" alt="" loading="lazy"/></div>
 <div class="info">
 <div class="h5 name">Just Starting</div>
 <span class="designation">Build your foundations</span>
 </div>
 </div>
 </div>
-<div class="image"><img alt="Musician creating in a home recording studio" height="440" loading="lazy" src="images/uniify/32263949.jpg" style="aspect-ratio:372/440;object-fit:cover;" width="372"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/studio.jpg"/></div>
 </div>
 </div>
 </div>
@@ -690,14 +682,14 @@
 <div class="testimonial-box">
 <div class="text">Bring your releases, audience work, and admin into focus. Keep track of the small actions that move your career forward.</div>
 <div class="author-info">
-<div class="thumb"><span class="stage-symbol small">♪</span></div>
+<div class="thumb"><img src="images/artists/portrait.jpg" alt="" loading="lazy"/></div>
 <div class="info">
 <div class="h5 name">Building Momentum</div>
 <span class="designation">Turn effort into a routine</span>
 </div>
 </div>
 </div>
-<div class="image"><img alt="Singer playing acoustic guitar at a microphone" height="440" loading="lazy" src="images/uniify/36758341.jpg" style="aspect-ratio:372/440;object-fit:cover;" width="372"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/studio.jpg"/></div>
 </div>
 </div>
 </div>
@@ -707,22 +699,22 @@
 <div class="testimonial-box">
 <div class="text">Review where you stand and decide what deserves your energy. Your goals can change. Your plan can change with them.</div>
 <div class="author-info">
-<div class="thumb"><span class="stage-symbol small">♪</span></div>
+<div class="thumb"><img src="images/artists/portrait.jpg" alt="" loading="lazy"/></div>
 <div class="info">
 <div class="h5 name">Finding Your Direction</div>
 <span class="designation">Make your next chapter count</span>
 </div>
 </div>
 </div>
-<div class="image"><img alt="Expressive portrait from the former Uniify theme" height="440" loading="lazy" src="assets/img/b14.jpg" style="aspect-ratio:372/440;object-fit:cover;" width="372"/></div>
+<div class="image"><img alt="" loading="lazy" decoding="async" src="images/artists/studio.jpg"/></div>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="swiper-arry">
-<button class="arry-prev swiper-arry-prev"><i class="fa-solid fa-chevron-left"></i></button>
-<button class="arry-next swiper-arry-next"><i class="fa-solid fa-chevron-right"></i></button>
+<button class="arry-prev swiper-arry-prev" aria-label="Previous artist stage">Prev</button>
+<button class="arry-next swiper-arry-next" aria-label="Next artist stage">Next</button>
 </div>
 </div>
 </div>
@@ -742,7 +734,7 @@
 </div>
 <div class="col-lg-5">
 <div class="text">Simple checklists for the work around your music.</div>
-<a class="theme-btn-one" href="workspace.html">Explore your roadmap <i class="fa-light fa-arrow-up-right"></i></a>
+<a class="theme-btn-one" href="workspace.html">Start with your release</a>
 </div>
 </div>
 </div>
@@ -750,7 +742,7 @@
 <div class="col-xxl-4 col-lg-6">
 <div class="blog-block denge-fade">
 <div class="inner-block">
-<div class="image"><a href="guide-release.html"><img alt="Microphone and recording controls on a studio desk" height="380" loading="lazy" src="images/uniify/14540966.jpg" style="aspect-ratio:437/380;object-fit:cover;" width="437"/></a></div>
+<div class="image"><a href="guide-release.html"><img alt="" loading="lazy" decoding="async" src="images/artists/studio.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/studio.jpg"/></a></div>
 <div class="content">
 <div class="inner">
 <div class="post-meta"><span class="date">Release planning</span></div>
@@ -764,7 +756,7 @@
 <div class="col-xxl-4 col-lg-6">
 <div class="blog-block denge-fade">
 <div class="inner-block">
-<div class="image"><a href="guide-credits.html"><img alt="Hands adjusting controls during a recording session" height="380" loading="lazy" src="images/uniify/5657678.jpg" style="aspect-ratio:437/380;object-fit:cover;" width="437"/></a></div>
+<div class="image"><a href="guide-credits.html"><img alt="" loading="lazy" decoding="async" src="images/artists/mixing.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/mixing.jpg"/></a></div>
 <div class="content">
 <div class="inner">
 <div class="post-meta"><span class="date">Rights &amp; credits</span></div>
@@ -778,7 +770,7 @@
 <div class="col-xxl-4 col-lg-6">
 <div class="blog-block denge-fade">
 <div class="inner-block">
-<div class="image"><a href="guide-routine.html"><img alt="Detailed view of an illuminated mixing console" height="380" loading="lazy" src="images/uniify/8197361.jpg" style="aspect-ratio:438/380;object-fit:cover;" width="438"/></a></div>
+<div class="image"><a href="guide-routine.html"><img alt="" loading="lazy" decoding="async" src="images/artists/drummer.jpg"/><img alt="" loading="lazy" decoding="async" src="images/artists/drummer.jpg"/></a></div>
 <div class="content">
 <div class="inner">
 <div class="post-meta"><span class="date">Career habits</span></div>
@@ -825,7 +817,7 @@
 <input aria-label="Your main music goal" id="start-goal" name="goal" placeholder="Your main music goal" type="text"/>
 <input aria-label="Time you can give this week" class="number" id="start-time" name="time" placeholder="Time you can give this week" type="text"/>
 <textarea aria-label="Your next step" name="form_message" placeholder="What would you like to work on next?"></textarea>
-<button class="theme-btn-one" type="submit">Save your starting point <i class="fa-light fa-arrow-up-right"></i></button>
+<button class="theme-btn-one" type="submit">Save your starting point</button>
 <p class="form-note">Saved in this browser. No email or account required.</p></form>
 </div>
 </div>
@@ -841,7 +833,7 @@
 <a class="footer-logo wow fadeInUp" data-wow-delay=".3s" href="index.html"><span class="uniify-brand">uniify<span>.</span><small>FOR ARTISTS</small></span></a>
 <div class="lets-talk-content wow fadeInUp" data-wow-delay=".5s">
 <div class="h2 title">
-                Get started <a class="arrow-icon" href="#start"><i class="fa-regular fa-arrow-up-right"></i></a>
+                Get started <a class="arrow-icon" href="#start"></a>
 <span>Build Your Future</span>
 </div>
 </div>
@@ -856,7 +848,7 @@
 <div class="h5 get-title">Choose one goal for this week</div>
 <form action="#" id="weekly-goal">
 <input aria-label="Your goal for the week" id="email2" name="email" placeholder="Your goal for the week" type="text"/>
-<button aria-label="Save your weekly goal" type="submit"><i class="fa-sharp fa-regular fa-paper-plane"></i></button>
+<button aria-label="Save your weekly goal" type="submit">Save</button>
 <span id="goal-status" role="status"></span></form>
 </div>
 </div>
@@ -870,14 +862,14 @@
 <li><a href="workspace.html">About Uniify</a></li>
 <li><a href="#plan">Your priorities</a></li>
 <li><a href="#start">Your stage</a></li>
-<li><a href="#start">Get started</a></li>
+
 </ul>
 </div>
 <div class="footer-widget-items">
 <div class="widget-title mb-25"><div class="h4 font-size-24 text-white font-weight-500">Your toolkit</div></div>
 <ul class="user-links">
 <li><a href="workspace.html">Career assessment</a></li>
-<li><a href="workspace.html">Progress Tracking</a></li>
+<li><a href="workspace.html">Career Progress</a></li>
 <li><a href="workspace.html">Artist workspace</a></li>
 <li><a href="workspace.html">Your roadmap</a></li>
 <li><a href="workspace.html">Progress tracking </a></li>
@@ -893,7 +885,7 @@
 <ul class="footer-menu">
 <li><a href="#faq">About this demo</a></li>
 <li><a href="#faq">Your data</a></li>
-<li><a href="#start">Get started</a></li>
+
 </ul>
 </div>
 </div>
@@ -921,5 +913,5 @@
 <script src="js/gsap-scroll-to-plugin.js"></script>
 <script src="js/SplitText.min.js"></script>
 <script src="js/script.js"></script>
-<script src="js/uniify-content.js"></script></body>
+<script src="js/uniify-content.js"></script><script src="js/experience.js"></script></body>
 </html>

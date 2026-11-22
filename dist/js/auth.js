@@ -1,33 +1,5 @@
-// UI preview only: never transmit or persist account credentials.
-const form = document.querySelector('#auth-form');
-for (const toggle of document.querySelectorAll('.password-toggle')) {
-  const input = document.getElementById(toggle.getAttribute('aria-controls'));
-  input.dataset.password = 'true';
-  toggle.addEventListener('click', () => {
-    const show = input.type === 'password';
-    input.type = show ? 'text' : 'password';
-    toggle.textContent = show ? 'Hide' : 'Show';
-    toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
-    toggle.setAttribute('aria-pressed', String(show));
-  });
-}
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  const name = form.querySelector('#artist-name');
-  if (name && !name.value.trim()) { name.setCustomValidity('Enter your artist name.'); name.reportValidity(); return; }
-  const status = document.querySelector('.auth-status');
-  status.textContent = form.dataset.mode === 'forgot-password'
-    ? 'Reset request previewed. No email was sent because password recovery is not connected yet.'
-    : form.dataset.mode === 'signup'
-      ? 'Your form is ready. Account creation is not connected yet. You can explore the demo workspace below.'
-      : 'Your form is ready. Sign-in is not connected yet. You can explore the demo workspace below.';
-  status.hidden = false;
-  document.querySelector('.workspace-preview').hidden = form.dataset.mode === 'forgot-password';
-  if (form.elements.password) form.elements.password.value = '';
-  status.focus();
-});
-form.addEventListener('input', () => {
-  form.querySelector('#artist-name')?.setCustomValidity('');
-  document.querySelector('.auth-status').hidden = true;
-  document.querySelector('.workspace-preview').hidden = true;
-});
+/* Same-origin auth adapter. Credentials are never stored by this client. */
+const form=document.querySelector('#auth-form');
+for(const toggle of document.querySelectorAll('.password-toggle')){const input=document.getElementById(toggle.getAttribute('aria-controls'));input.dataset.password='true';toggle.onclick=()=>{input.type=input.type==='password'?'text':'password';toggle.textContent=input.type==='password'?'Show':'Hide';toggle.setAttribute('aria-pressed',String(input.type==='text'))}}
+form.addEventListener('submit',async event=>{event.preventDefault();const status=document.querySelector('.auth-status'),button=form.querySelector('[type=submit]');status.hidden=false;status.textContent='';const name=form.querySelector('#artist-name');if(name&&!name.value.trim()){name.setCustomValidity('Enter your artist name.');name.reportValidity();return}button.disabled=true;const mode=form.dataset.mode;try{const response=await fetch('/api/auth/'+mode,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(Object.fromEntries(new FormData(form)))});if(!response.headers.get('content-type')?.includes('application/json'))throw Error('Account services are not connected yet. You can try the demo setup below.');const result=await response.json();if(!response.ok)throw Error(result.error||'Unable to continue. Please try again.');if(mode==='signup'){sessionStorage.setItem('uniify-pending-email',form.elements.email.value);sessionStorage.setItem('uniify-pending-name',name.value.trim());location.href='verify-email.html'}else if(mode==='signin'){location.href=result.onboarded?'workspace.html':'onboarding.html'}else status.textContent='If this email has an account, reset instructions will be sent.'}catch(error){status.textContent=error.message;status.focus()}finally{button.disabled=false;if(form.elements.password)form.elements.password.value=''}});
+form.addEventListener('input',()=>form.querySelector('#artist-name')?.setCustomValidity(''));

@@ -1,0 +1,79 @@
+/* Uniify adaptation of Creovibe Home 1.
+   Layout, spacing, masks, image effects and responsive breakpoints come from style.css.
+   Only branding, purple treatment, arrowless controls and navigation refinements live here. */
+.uniify-landing {
+  --theme-color1: #8d45ed;
+  --theme-color1-rgb: 141,69,237;
+  --theme-color3: #bc91ff;
+  --theme-color3-rgb: 188,145,255;
+  --gradient-1: linear-gradient(180deg,rgba(24,24,24,0),#8d45ed);
+  --uniify-gradient: linear-gradient(115deg,#7131d4 0%,#9954f5 65%,#ae70ff 100%);
+}
+html { scroll-padding-top: 100px; }
+.uniify-brand { display:inline-block; color:#fff; font:600 38px/1 var(--heading-font-family2); letter-spacing:-1.8px; }
+.uniify-brand>span { color:var(--theme-color3); }
+.uniify-brand small { display:block; margin-top:7px; font:500 9px/1.2 var(--body-font-family); letter-spacing:2.5px; color:#d9cde9; }
+.footer-logo .uniify-brand { font-size:100px; }
+.footer-logo .uniify-brand small { font-size:12px; letter-spacing:4px; }
+.uniify-monogram { font:600 75px/1 var(--heading-font-family2); color:white; letter-spacing:-8px; }
+.audience-label { color:#e5e5e5; font:600 26px/1.2 var(--body-font-family); letter-spacing:-.6px; }
+/* Keep the original full-bleed photograph and its slow zoom. Preserve photographic detail. */
+.banner-section .bg-banner-img { background-image:url('../images/artists/hero.jpg'); filter:none; }
+.banner-section .banner-overlay { background:linear-gradient(90deg,rgba(22,6,43,.2),transparent 70%),radial-gradient(ellipse at 25% 45%,rgba(134,54,235,.22),transparent 65%); mix-blend-mode:normal; }
+.banner-section .content-box .title { max-width:1015px; }
+.banner-section .style-text span { color:#9d56f2; }
+/* Original pill silhouette, without arrow circles, outlines, bevels or asymmetric padding. */
+.uniify-landing :is(.theme-btn-one,.theme-btn-two,.theme-btn-three,.get-started) { min-height:50px; padding:15px 26px; border:0; border-radius:999px; gap:0; justify-content:center; line-height:1.25; box-shadow:none; transition:background .25s,color .25s,transform .25s; }
+.uniify-landing :is(.theme-btn-one,.theme-btn-three) { background:var(--uniify-gradient); color:#fff; }
+.uniify-landing .theme-btn-two { background:#fff; color:#17101f; }
+.uniify-landing :is(.theme-btn-one,.theme-btn-two,.theme-btn-three,.get-started)::before { display:none; }
+.uniify-landing :is(.theme-btn-one,.theme-btn-three):hover { background:linear-gradient(115deg,#8142df,#a965ff); color:white; transform:translateY(-2px); }
+.uniify-landing .theme-btn-two:hover { background:#e9dafa; color:#241036; transform:translateY(-2px); }
+.uniify-landing .service-button-one { gap:0; }
+.uniify-landing .service-button-one:hover { color:var(--theme-color3); }
+.uniify-landing .swiper-arry :is(.arry-prev,.arry-next) { width:auto; min-width:64px; height:44px; padding:0 16px; border:0; border-radius:999px; font:500 14px var(--body-font-family); }
+.uniify-landing .back-to-top-btn { border:0; border-radius:999px; background:var(--uniify-gradient); color:white; font:500 12px var(--body-font-family); }
+/* Keep the template's navigation frame and white sticky header. */
+.main-header .main-menu .navigation>li>a { transition:color .2s; }
+.main-header:not(.sticky-header) .main-menu .navigation>li>a:hover { color:var(--theme-color3); }
+.sticky-header .uniify-brand { color:#17101f; }
+.sticky-header .uniify-brand small { color:#6b4c85; }
+.sticky-header .main-menu .navigation>li>a:hover { color:#7632cd; }
+.mobile-nav-toggler,.mobile-menu .close-btn { border:0; background:transparent; }
+.mobile-menu .close-btn { padding:0; }
+.mobile-menu .navigation a { min-height:48px; }
+.uniify-landing :is(a,button,input,textarea,select):focus-visible { outline:2px solid #c7a6ff!important; outline-offset:5px; }
+.form-note,#goal-status { display:block; margin-top:14px; color:#c7bbdb; font-size:14px; }
+.contact-section input,.contact-section textarea { color:white; }
+.testimonial-info .review-number { font-size:70px; }
+.pricing-block .price { font-size:clamp(36px,4vw,60px); }
+.pricing-block .tag { min-height:82px; display:flex; align-items:center; justify-content:center; }
+.pricing-block .list img,.arrow-shape,.service-block .shape1 img { filter:hue-rotate(263deg); }
+.text-reveal-anim .word,.text-reveal-anim2 .word { white-space:nowrap; }
+.motion-control { border:0; padding:0; background:none; color:inherit; font:inherit; text-decoration:underline; text-underline-offset:4px; }
+.no-motion * { animation:none!important; transition:none!important; }
+.no-motion .denge-fade { opacity:1!important; transform:none!important; }
+@media(max-width:1199.98px) { .banner-section .content-box .title { font-size:clamp(60px,8.3vw,100px); line-height:1.1; } }
+@media(max-width:767.98px) { .banner-section .content-box .title { font-size:clamp(40px,8.5vw,60px); line-height:1.13; } .audience-label { font-size:22px; } .footer-logo .uniify-brand { font-size:68px; } }
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto!important; } *,*::before,*::after { animation:none!important; transition:none!important; } }
+
+/* Match the recording's header overlay even when motion is paused. */
+.uniify-landing .main-header { position:absolute; top:0; left:0; }
+.uniify-landing { overflow-x:clip; }
+.uniify-landing .page-wrapper { overflow:visible; }
+.uniify-landing .mobile-menu { overflow:clip; }
+.uniify-landing .mobile-menu .menu-box { width:100%; }
+.uniify-landing .mobile-menu .upper-box { min-height:88px; }
+.uniify-landing .mobile-menu .nav-logo { flex:1; min-width:0; }
+.uniify-landing .mobile-menu .close-btn { display:grid; place-items:center; width:44px; height:44px; flex:0 0 44px; font-size:22px; }
+.service-block-seven .icon img { filter:hue-rotate(263deg); }
+
+.uniify-landing .get-started { background:var(--uniify-gradient); color:white; }
+.uniify-landing .get-started:hover { background:#a05cf3; color:white; }
+.uniify-landing .sub-title.denge-words { column-gap:.28em; }
+.uniify-landing .sub-title.denge-words>div { margin-inline-end:.2em; }
+.uniify-landing .pricing-block .list img { filter:grayscale(1) sepia(1) hue-rotate(222deg) saturate(3); }
+@media(max-width:575.98px) { .banner-section .content-box .title { font-size:clamp(34px,9vw,48px); } }
+/* Keep the template's two-line project heading intact after character splitting. */
+.projects-section .sec-title .title>span { display:block; white-space:nowrap; }
+.main-header .sticky-header .main-menu .navigation>li>a:hover { color:#7632cd; }

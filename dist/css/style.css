@@ -29,7 +29,6 @@ License: copyright commercial
 22. News Section
 23. Main Footer
 **********************************************/
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap");
 @import url("animate.css");
 @import url("aos.css");
 @import url("swiper.min.css");
@@ -73,7 +72,7 @@ License: copyright commercial
   --headings-color: #ffffff;
   --link-color: var(--theme-color1);
   --link-hover-color: var(--theme-color1);
-  --body-font-family: "Manrope", sans-serif;
+  --body-font-family: "Creato Display", sans-serif;
   --heading-font-family: "Creato Display", sans-serif;
   --heading-font-family2: "Clash Display", sans-serif;
   --body-bg: #030303;
@@ -115,13 +114,13 @@ License: copyright commercial
   font-display: swap;
   font-family: "Clash Display";
   font-style: normal;
-  src: url("../fonts/clash-display/ClashDisplay-Semibold.otf") format("woff2");
+  src: url("../fonts/clash-display/ClashDisplay-Semibold.otf") format("opentype");
 }
 @font-face {
   font-display: swap;
   font-family: "Creato Display";
   font-style: normal;
-  src: url("../fonts/creato-display/CreatoDisplay-Regular.otf") format("woff2");
+  src: url("../fonts/creato-display/CreatoDisplay-Regular.otf") format("opentype");
 }
 /*
  * typography.scss
