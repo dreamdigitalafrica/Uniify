@@ -1,0 +1,25 @@
+Uniify Resend setup — DNS records added in Namecheap on 24 November 2026; verification pending
+Domain: uniifyforartists.com
+Provider: Namecheap > Domain List > Manage > Advanced DNS
+TTL: Automatic for each record
+
+Type: TXT
+Host: resend._domainkey
+Value: p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCu+ekgalwlHpWY9Ar24umZdzFNA+peE1EmdMucDhOo/mq8wNPurrJb/MVs7nC7wsSwuI/M9p1vpU1c4VPWGT7qfocNIUIqeGqOhnEqmc1ovxaXQAan1UMfQUOkJkC4Rm1h9FebLhAKTKUdA1w99hVR6tuHwOHU7hWcyaFnPOIkvwIDAQAB
+
+Type: MX
+Host: send
+Value: feedback-smtp.eu-west-1.amazonses.com
+Priority: 10
+
+Type: TXT
+Host: send
+Value: v=spf1 include:amazonses.com ~all
+
+Type: CNAME
+Host: rsend
+Value: send.forge.rmta.net
+
+Keep existing website records. If TXT SPF already exists at send, merge mechanisms into one SPF value. If MX already exists at send, review it before replacing.
+
+After verification: create a domain-restricted sending credential and configure Supabase Auth custom SMTP using Resend's current documented SMTP settings. No credential has been created yet, and SMTP has not been enabled. The browser security policy requires the user to enter and submit the new SMTP credential directly. Confirm delivery and test signup/recovery links before marking complete.

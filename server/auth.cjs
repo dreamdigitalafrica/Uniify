@@ -18,7 +18,6 @@ function setSession(res,session){
 function clearSession(res){res.setHeader('Set-Cookie',['access','refresh'].map(k=>`__Host-uniify-${k}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`));}
 function validEmail(value){if(typeof value!=='string'||value.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))reject(400,'Enter a valid email address.');return value.trim();}
 function validPassword(value){if(typeof value!=='string'||value.length<10||value.length>128)reject(400,'Use a password between 10 and 128 characters.');return value;}
-function validCode(value){if(typeof value!=='string'||!/^\d{6}$/.test(value))reject(400,'Enter the six-digit email code.');return value;}
 function publicUser(u){return {id:u.id,email:u.email,artist:u.user_metadata?.artist_name||'',onboarding:u.user_metadata?.uniify_onboarding||null,onboarded:!!u.user_metadata?.uniify_onboarding?.completedAt};}
 function createHandler({fetchImpl=fetch,env=process.env}={}){
  return async function handler(req,res){
@@ -98,12 +97,7 @@ function createHandler({fetchImpl=fetch,env=process.env}={}){
     if(!s.user?.email_confirmed_at)reject(403,'Verify your email before signing in.');
     setSession(res,s);return send(200,publicUser(s.user));
    }
-   if(action==='verify-email'){
-    const s=await api('verify',{email:validEmail(body.email),token:validCode(body.code),type:'signup'});
-    if(!s.user?.email_confirmed_at||!s.access_token||!s.refresh_token)reject(400,'Verification failed. Request a new code.');
-    setSession(res,s);return send(200,publicUser(s.user));
-   }
-   if(action==='resend-code'){await api('resend',{email:validEmail(body.email),type:'signup',email_redirect_to:origin+'/auth-callback.html'});return send(200,{ok:true});}
+   if(action==='resend-link'){await api('resend',{email:validEmail(body.email),type:'signup',email_redirect_to:origin+'/auth-callback.html'});return send(200,{ok:true});}
    if(action==='forgot-password'){
     const email=validEmail(body.email);
     try{await api('recover?redirect_to='+encodeURIComponent(origin+'/auth-callback.html'),{email})}catch(error){if(error.status===429||error.status===503)throw error;}
@@ -111,8 +105,9 @@ function createHandler({fetchImpl=fetch,env=process.env}={}){
    }
    if(action==='reset-password'){
     const password=validPassword(body.password);
-    const s=body.code?await api('verify',{email:validEmail(body.email),token:validCode(body.code),type:'recovery'}):{access_token:(await session()).token};
-    if(!s.access_token)reject(400,'Invalid or expired code. Request another reset email.');
+    if(body.code!==undefined)reject(400,'Open the link in your reset email to continue.');
+    const s={access_token:(await session()).token};
+    if(!s.access_token)reject(400,'Invalid or expired link. Request another reset email.');
     await api('user',{password},s.access_token,'PUT');
     await api('logout?scope=global',{},s.access_token);
     clearSession(res);return send(200,{ok:true});
