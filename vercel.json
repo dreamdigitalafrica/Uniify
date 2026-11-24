@@ -5,6 +5,37 @@
   "installCommand": "",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/home.html", "destination": "/index.html" }
+    {
+      "source": "/home.html",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "uniifyforartists.com"
+        }
+      ],
+      "destination": "https://www.uniifyforartists.com/:path*",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/auth-callback.html",
+      "headers": [
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
   ]
 }

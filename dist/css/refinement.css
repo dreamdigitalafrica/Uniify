@@ -25,3 +25,39 @@ html:has(.uniify-landing){overflow-x:clip}
 [data-appearance=dark]{--accent:#b78aef;--soft:#a777ed24}.management .theme-btn-two,.auth-submit.theme-btn-two{background:#7c49ce;color:white}
 .article-main{max-width:860px}.article-main ul{padding-left:24px;margin:32px 0}.article-main li{list-style:disc;margin:22px 0;color:var(--muted)}.article-main h1{font-size:clamp(36px,6vw,64px)}.simple-page .theme-btn-two{border-radius:26px;background:#7c49ce;color:#fff;padding:12px 22px;line-height:24px}.simple-page .theme-btn-two:before,.simple-page .theme-btn-two:after{display:none}
 .uniify-landing .sticky-header .nav-outer{display:flex;align-items:center;gap:24px}.uniify-landing .sticky-header .theme-switch{flex-shrink:0;margin:0}.uniify-landing .sticky-header .main-menu{float:none}.uniify-landing .sticky-header .inner-container{align-items:center}
+
+/* Use Creovibe's 1360px content frame consistently across page families.
+   Images fill their grid column; the template retains its distinct card sizes. */
+:root{--site-frame-width:1360px;--site-frame-gutter:15px}
+.uniify-landing .container,.simple-page .simple-nav,.simple-page .simple-main{
+ width:100%;max-width:var(--site-frame-width);margin-inline:auto;
+ padding-inline:var(--site-frame-gutter);box-sizing:border-box;
+}
+.simple-page .article-main{max-width:var(--site-frame-width)}
+.simple-page .article-main>p,.simple-page .article-main>ul{max-width:860px}
+.management #view{width:100%;max-width:var(--site-frame-width);margin-inline:auto;box-sizing:border-box}
+.uniify-landing .image,.simple-page .insight-grid article,.management .resource-grid>*{min-width:0;max-width:100%}
+.uniify-landing .image img,.simple-page .about-cover,.simple-page .insight-grid img,.management .resource-grid .image img{
+ display:block;width:100%;max-width:100%;object-fit:cover;
+}
+.uniify-landing .about-section .image{height:480px}
+.uniify-landing .about-section .image img{height:100%;object-position:center 66%}
+.simple-page .about-cover,.simple-page .insight-grid img{border-radius:16px}
+@media(max-width:767.98px){
+ .uniify-landing .about-section .image{height:auto;aspect-ratio:4/3}
+ .uniify-landing .about-section .experience{height:auto;min-height:280px}
+}
+/* Single photograph per card, preserving the template's image dimensions. */
+.uniify-landing .project-block .image img:only-child,.uniify-landing .blog-block .image img:only-child{position:relative;transform:none;opacity:1;filter:none}
+.uniify-landing .project-block .image,.uniify-landing .blog-block .image{aspect-ratio:4/3}
+.uniify-landing .project-block .image a,.uniify-landing .blog-block .image a{display:block;height:100%}
+.uniify-landing .testimonial-block .image img{object-fit:contain;padding:60px;background:var(--uniify-gradient)}
+
+/* One outlined wordmark, with round i dots, for every page and theme. */
+.uniify-brand{line-height:1!important;letter-spacing:normal!important}
+.uniify-brand .uniify-logo-mark{display:block;width:3.7em;height:auto;overflow:visible}
+.uniify-brand svg path{fill:currentColor}
+.uniify-landing .sticky-header .uniify-brand{color:#17101f}
+[data-theme="light"] .simple-page .uniify-brand{color:#17101f}
+.auth-story .uniify-brand{color:#fff}
+.manager-next{margin-top:24px}.manager-action{padding:20px 0;border-bottom:1px solid var(--line)}.manager-action:last-child{border:0}.manager-action h3{font-size:19px}.manager-action p{margin:10px 0}.manager-action small{color:var(--muted)}.manager-context{margin-bottom:28px}.local-badge{white-space:normal;max-width:210px}.app-topbar .text-link{font-size:12px}.management .app-topbar{flex-wrap:wrap;height:auto;min-height:80px}.management .top-actions{flex-wrap:wrap}

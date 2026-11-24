@@ -18,7 +18,7 @@ html { scroll-padding-top: 100px; }
 .uniify-monogram { font:600 75px/1 var(--heading-font-family2); color:white; letter-spacing:-8px; }
 .audience-label { color:#e5e5e5; font:600 26px/1.2 var(--body-font-family); letter-spacing:-.6px; }
 /* Keep the original full-bleed photograph and its slow zoom. Preserve photographic detail. */
-.banner-section .bg-banner-img { background-image:url('../images/artists/hero.jpg'); filter:none; }
+.banner-section .bg-banner-img { background-image:url('../images/artists/hero-headphones.jpg'); filter:none; }
 .banner-section .banner-overlay { background:linear-gradient(90deg,rgba(22,6,43,.2),transparent 70%),radial-gradient(ellipse at 25% 45%,rgba(134,54,235,.22),transparent 65%); mix-blend-mode:normal; }
 .banner-section .content-box .title { max-width:1015px; }
 .banner-section .style-text span { color:#9d56f2; }

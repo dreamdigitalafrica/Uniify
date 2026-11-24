@@ -1,17 +1,21 @@
-# Account integration status
+# Account and cloud integration
 
-The static prototype does not create accounts or send email. Signup, sign-in, reset and verification clients now call same-origin JSON endpoints and report unavailable services honestly. No passwords or verification codes are persisted in browser storage. The explicitly labelled demo setup works without authentication and preserves existing local workspace records.
+Supabase project: stnetlqzgmuaqormvnvg. Canonical site: https://www.uniifyforartists.com.
 
-Required server contracts (not implemented in this static project):
+Vercel functions use SUPABASE_PUBLISHABLE_KEY and optional SUPABASE_URL, APP_ORIGIN. No service-role key is used. Passwords, access tokens and refresh tokens are never persisted in browser storage. Sessions use Secure, HttpOnly, SameSite=Lax cookies. State-changing requests require the matching site Origin and JSON content type. Preview origins come only from Vercel's deployment environment.
 
-- POST `/api/auth/signup`: artist-name, email, password. Validate and create a pending account, send a six-digit code; return success JSON only after accepting the verification request.
-- POST `/api/auth/verify-email`: email, code. Validate server-side expiry, attempt limits and single use; establish an HttpOnly secure session on success.
-- POST `/api/auth/resend-code`: email. Enforce server-side rate limits and invalidate old codes.
-- POST `/api/auth/signin`: email, password. Return `{ "onboarded": true|false }` with authenticated session. Reject unverified users or return them to verification.
-- POST `/api/auth/forgot-password`: email. Return a uniform response, send reset instructions for eligible users.
-- POST `/api/auth/onboarding`: role, stage, goal. Require a verified authenticated session and save answers.
-- Errors: non-2xx status and `{ "error": "User-safe explanation" }`.
+Auth endpoints: POST /api/auth/signup, signin, verify-email, resend-code, forgot-password, reset-password, callback, onboarding, signout; GET /api/auth/session. Passwords for signup/recovery are 10–128 characters. Codes are six digits. Supabase controls confirmation expiry, single use and provider rate limits.
 
-Production requires a selected identity/email provider, verified sender, server-side account storage, sessions, CSRF protection, password recovery completion and account-scoped workspace persistence. The local workspace is a demo, not an authorization boundary. Do not deploy these pages as a working production account service without that integration.
+The default Supabase emails contain links. auth-callback.html removes the token fragment immediately, validates the access token through Auth, rotates the refresh token, checks both belong to the same identity, and establishes the cookie session. Recovery then prompts for a new password. Code entry remains available for custom templates. Site URL and the explicit callback allowlist were saved through the dashboard on 24 November 2026. Email confirmations remain required.
 
-Founder supplied: Samuel Fakunle. Contact: Uniifyforartists@gmail.com. Biography has not been supplied; no biography was invented. This public contact address does not configure an email delivery service.
+Custom email delivery is NOT verified. The connected Resend account has no Uniify sending domain. Supabase default email delivery is restricted and must not be advertised as unrestricted production email. Configure a verified sending domain and SMTP, then test an actual received confirmation and recovery email. Prepared code templates are in supabase/templates; they are not claimed to be installed.
+
+GET /api/workspace returns {data,revision,updated_at}; a missing record returns data:null, revision:0. PUT accepts {data,revision}; success returns {revision,updated_at}. A stale revision returns 409. Other users' IDs are never accepted as ownership inputs. The SQL function uses auth.uid() and RLS with the verified user's bearer token. Writes are atomic compare-and-save operations.
+
+Workspace data retains schema version 3 and all task/release links, transitions, notes, history, observations and financial records. Additional fields: managerVersion, recommendationHistory and checkins. Maximum request size is 1.2 MB; profile images are resized to small JPEGs by the existing UI.
+
+Accounts load cloud data before rendering. Failed/pending writes have an account-scoped browser backup and visible retry/export controls. Revision conflicts stop uploads until the artist exports pending work or loads the newer cloud copy. Reopening with a conflicting pending copy offers export and cloud selection rather than silently overwriting. One-time legacy import is offered only when no cloud copy exists. The local demo uses its own key.
+
+Known operational limits: there is no continuous background cross-device refresh, offline initial loading, server-side queued email retry, or distributed app-level rate limiter beyond Supabase's controls. Another device sees updates on reload. Failed saves remain local until successfully retried; browser storage can be cleared by the user or browser. Signout waits for successful flush.
+
+Run npm ci and npm test. Runtime functions are dependency-free; jsdom is a pinned development-only test dependency. Tests cover the browser DOM journey, two simulated devices/accounts, retry/conflict handling, API ownership and Supabase RLS in a rollback transaction. Actual inbox delivery and full live-account journey remain separately recorded acceptance checks.
