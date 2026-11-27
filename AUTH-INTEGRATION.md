@@ -19,3 +19,12 @@ Accounts load cloud data before rendering. Failed/pending writes have an account
 Known operational limits: there is no continuous background cross-device refresh, offline initial loading, server-side queued email retry, or distributed app-level rate limiter beyond Supabase's controls. Another device sees updates on reload. Failed saves remain local until successfully retried; browser storage can be cleared by the user or browser. Signout waits for successful flush.
 
 Run npm ci and npm test. Runtime functions are dependency-free; jsdom is a pinned development-only test dependency. Tests cover the browser DOM journey, two simulated devices/accounts, retry/conflict handling, API ownership and Supabase RLS in a rollback transaction. Actual inbox delivery and full live-account journey remain separately recorded acceptance checks.
+
+
+Google sign-in (prepared, provider activation pending)
+- GET /api/auth/providers reads Supabase's public provider settings; the Google button is shown only when enabled.
+- POST /api/auth/google creates a five-minute HttpOnly Secure SameSite=Lax browser-bound PKCE verifier and returns Supabase's fixed Google authorization URL.
+- POST /api/auth/google-callback exchanges the returned auth code with the cookie verifier, verifies the user via Auth, sets private session cookies, and clears the verifier.
+- Google Cloud: Web application client. Authorized JavaScript origin https://www.uniifyforartists.com. Authorized redirect URI https://stnetlqzgmuaqormvnvg.supabase.co/auth/v1/callback. Configure consent branding for Uniify for Artists, external audience, and basic email/profile scopes. Enter the client ID/secret directly in Supabase Authentication > Sign In / Providers > Google.
+- Application redirect remains https://www.uniifyforartists.com/auth-callback.html.
+- A real Google account authorization test is required after provider activation. No credential was created or entered by the agent.

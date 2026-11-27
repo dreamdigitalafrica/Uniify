@@ -1,4 +1,5 @@
 'use strict';
+const {randomBytes,createHash}=require('node:crypto');
 // Supabase owns identities, password hashing, email codes and refresh-token rotation.
 const URL_DEFAULT='https://stnetlqzgmuaqormvnvg.supabase.co';
 const ORIGIN_DEFAULT='https://www.uniifyforartists.com';
@@ -8,24 +9,24 @@ const goals=['Release my first music','Grow my audience','Earn more from music',
 class Failure extends Error { constructor(status,message){super(message);this.status=status;} }
 const reject=(status,message)=>{throw new Failure(status,message)};
 function cookies(req){return Object.fromEntries((req.headers.cookie||'').split(';').map(v=>v.trim().split(/=(.*)/s).slice(0,2)).filter(v=>v.length===2));}
-function setSession(res,session){
+function setSession(res,session,extra=[]){
  const age=30*24*3600;
  res.setHeader('Set-Cookie',[
   `__Host-uniify-access=${session.access_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`,
-  `__Host-uniify-refresh=${session.refresh_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`
+  `__Host-uniify-refresh=${session.refresh_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`, ...extra
  ]);
 }
 function clearSession(res){res.setHeader('Set-Cookie',['access','refresh'].map(k=>`__Host-uniify-${k}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`));}
 function validEmail(value){if(typeof value!=='string'||value.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))reject(400,'Enter a valid email address.');return value.trim();}
 function validPassword(value){if(typeof value!=='string'||value.length<10||value.length>128)reject(400,'Use a password between 10 and 128 characters.');return value;}
-function publicUser(u){return {id:u.id,email:u.email,artist:u.user_metadata?.artist_name||'',onboarding:u.user_metadata?.uniify_onboarding||null,onboarded:!!u.user_metadata?.uniify_onboarding?.completedAt};}
+function publicUser(u){return {id:u.id,email:u.email,artist:u.user_metadata?.artist_name||u.user_metadata?.full_name||u.user_metadata?.name||'',onboarding:u.user_metadata?.uniify_onboarding||null,onboarded:!!u.user_metadata?.uniify_onboarding?.completedAt};}
 function createHandler({fetchImpl=fetch,env=process.env}={}){
  return async function handler(req,res){
   res.setHeader('Cache-Control','no-store');res.setHeader('Vary','Cookie');res.setHeader('X-Content-Type-Options','nosniff');
   const send=(status,data)=>res.status(status).json(data);
   try{
    const action=req.query?.action||new URL(req.url,'https://local').pathname.split('/').pop();
-   const read=action==='session'||(action==='workspace'&&req.method==='GET');
+   const read=action==='providers'||action==='session'||(action==='workspace'&&req.method==='GET');
    if(req.method!==(action==='workspace'&&!read?'PUT':read?'GET':'POST')){res.setHeader('Allow',action==='workspace'?'GET, PUT':read?'GET':'POST');return send(405,{error:'Method not allowed.'});}
    const origin=env.VERCEL_ENV==='preview'&&env.VERCEL_URL?'https://'+env.VERCEL_URL:env.APP_ORIGIN||ORIGIN_DEFAULT;
    if(!read){
@@ -50,6 +51,29 @@ function createHandler({fetchImpl=fetch,env=process.env}={}){
      reject(400,'Unable to complete this request. Check your details or request a new code.');
     }
     return result;
+   }
+   if(action==='providers'){
+    const settings=await api('settings',null,null,'GET');return send(200,{google:settings.external?.google===true});
+   }
+   if(action==='google'){
+    const settings=await api('settings',null,null,'GET');
+    if(!settings.external?.google)reject(503,'Google sign-in is not available yet. Please sign in with email.');
+    const verifier=randomBytes(32).toString('base64url');
+    const challenge=createHash('sha256').update(verifier).digest('base64url');
+    res.setHeader('Set-Cookie',`__Host-uniify-pkce=${verifier}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=300`);
+    const url=new URL(base+'/auth/v1/authorize');
+    for(const [k,v]of Object.entries({provider:'google',redirect_to:origin+'/auth-callback.html',code_challenge:challenge,code_challenge_method:'s256',scopes:'openid email profile',prompt:'select_account'}))url.searchParams.set(k,v);
+    return send(200,{url:url.href});
+   }
+   if(action==='google-callback'){
+    const verifier=cookies(req)['__Host-uniify-pkce'];
+    if(!verifier||! /^[A-Za-z0-9_-]{43}$/.test(verifier)||typeof body.code!=='string'||!body.code||body.code.length>2048)reject(400,'Google sign-in expired. Please start again from the sign-in page.');
+    const s=await api('token?grant_type=pkce',{auth_code:body.code,code_verifier:verifier});
+    if(!s.access_token||!s.refresh_token)reject(400,'Unable to complete Google sign-in.');
+    const user=await api('user',null,s.access_token,'GET');
+    if(!user.email_confirmed_at)reject(403,'Verify your email first.');
+    setSession(res,s,['__Host-uniify-pkce=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0']);
+    return send(200,publicUser(user));
    }
    async function session(){
     const c=cookies(req);let token=c['__Host-uniify-access'],user;
