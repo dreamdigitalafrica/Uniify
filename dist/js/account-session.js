@@ -24,9 +24,9 @@
    }
    window.uniifyInitialState=initial;
    let queued=null,inFlight=null,conflict=false,last=JSON.stringify(cloud.data),timer;
-   const badge=document.querySelector('.local-badge');badge.setAttribute('role','status');badge.setAttribute('aria-live','polite');badge.style.display='inline';
+   const badge=document.querySelector('.local-badge');badge.setAttribute('role','status');badge.setAttribute('aria-live','polite');badge.hidden=true;
    const retry=document.createElement('button');retry.className='text-link';retry.textContent='Retry save';retry.hidden=true;badge.after(retry);
-   function status(text,failed=false){badge.textContent=text;retry.hidden=!failed;}
+   function status(text,failed=false){badge.textContent=text;badge.hidden=true;retry.hidden=!failed;}
    function downloadData(data){const u=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=u;a.download='uniify-pending-workspace.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
    const exportPending=document.createElement('button');exportPending.className='text-link';exportPending.textContent='Export pending changes';exportPending.hidden=true;retry.after(exportPending);exportPending.onclick=()=>downloadData(parse(pendingKey)?.data||initial);
    const latest=document.createElement('button');latest.className='text-link';latest.textContent='Load cloud copy';latest.hidden=true;exportPending.after(latest);latest.onclick=()=>{if(confirm('Export pending changes first. Load the latest cloud copy and discard this device’s pending changes?')){localStorage.removeItem(pendingKey);location.reload()}};
@@ -36,7 +36,7 @@
    window.uniifyCloud={save(data){const copy=JSON.parse(JSON.stringify(data));if(JSON.stringify(copy)===last&&!queued)return;queued=copy;try{localStorage.setItem(pendingKey,JSON.stringify({revision,data:copy}))}catch{status('Device backup unavailable');}status(conflict?'Changed on another device':'Changes pending');clearTimeout(timer);timer=setTimeout(flush,350);},flush};
    retry.onclick=flush;window.addEventListener('online',flush);window.addEventListener('beforeunload',e=>{if(queued||inFlight){e.preventDefault();e.returnValue='';}});
    status(cloud.data?'Saved to cloud':'Preparing cloud workspace');
-   const signout=document.createElement('button');signout.className='text-link';signout.textContent='Sign out';signout.onclick=async()=>{signout.disabled=true;try{if(!await flush())throw Error('Save or export pending changes before signing out.');await request('/api/auth/signout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});localStorage.removeItem(key);sessionStorage.removeItem('uniify-onboarding-draft');location.replace('signin.html');}catch(e){status(e.message);signout.disabled=false;}};document.querySelector('#account-links').append(signout);
+   const signout=document.createElement('button');signout.className='text-link';signout.dataset.signout='';signout.hidden=true;signout.textContent='Sign out';signout.onclick=async()=>{signout.disabled=true;try{if(!await flush())throw Error('Save or export pending changes before signing out.');await request('/api/auth/signout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});localStorage.removeItem(key);sessionStorage.removeItem('uniify-onboarding-draft');location.replace('signin.html');}catch(e){status(e.message,true);alert(e.message);signout.disabled=false;}};document.querySelector('#account-links').append(signout);
    document.querySelector('.app-footer span:last-child').textContent='Private workspace · Cloud sync';
   }
   for(const src of ['career-engine.js','recommendations.js','management.js','career-ui.js','workspace-refinement.js','digital-manager.js'])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='js/'+src;script.onload=resolve;script.onerror=reject;document.body.append(script)});
