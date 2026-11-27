@@ -37,7 +37,7 @@
    retry.onclick=flush;window.addEventListener('online',flush);window.addEventListener('beforeunload',e=>{if(queued||inFlight){e.preventDefault();e.returnValue='';}});
    status(cloud.data?'Saved to cloud':'Preparing cloud workspace');
    const signout=document.createElement('button');signout.className='text-link';signout.dataset.signout='';signout.hidden=true;signout.textContent='Sign out';signout.onclick=async()=>{signout.disabled=true;try{if(!await flush())throw Error('Save or export pending changes before signing out.');await request('/api/auth/signout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});localStorage.removeItem(key);sessionStorage.removeItem('uniify-onboarding-draft');location.replace('signin.html');}catch(e){status(e.message,true);alert(e.message);signout.disabled=false;}};document.querySelector('#account-links').append(signout);
-   document.querySelector('.app-footer span:last-child').textContent='Private workspace · Cloud sync';
+   document.querySelector('.app-footer > span:nth-of-type(2)').textContent='Private workspace · Cloud sync';
   }
   for(const src of ['career-engine.js','recommendations.js','management.js','career-ui.js','workspace-refinement.js','digital-manager.js'])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='js/'+src;script.onload=resolve;script.onerror=reject;document.body.append(script)});
  }catch(error){if(error.status===401||error.status===403){location.replace('signin.html');return;}const view=document.querySelector('#view');view.textContent='Unable to open your workspace. '+error.message+' ';const retry=document.createElement('a');retry.href=location.href;retry.textContent='Try again';view.append(retry);}
