@@ -61,3 +61,5 @@ html:has(.uniify-landing){overflow-x:clip}
 [data-theme="light"] .simple-page .uniify-brand{color:#17101f}
 .auth-story .uniify-brand{color:#fff}
 .manager-next{margin-top:24px}.manager-action{padding:20px 0;border-bottom:1px solid var(--line)}.manager-action:last-child{border:0}.manager-action h3{font-size:19px}.manager-action p{margin:10px 0}.manager-action small{color:var(--muted)}.manager-context{margin-bottom:28px}.local-badge{white-space:normal;max-width:210px}.app-topbar .text-link{font-size:12px}.management .app-topbar{flex-wrap:wrap;height:auto;min-height:80px}.management .top-actions{flex-wrap:wrap}
+
+.artist-links{margin-top:24px}.artist-links h3{font-size:18px;margin:24px 0 12px}.artist-link-row{min-width:0}.artist-link-row .field{width:100%}.artist-link-row input{width:100%;min-width:0}#custom-artist-links .artist-link-row{display:flex;gap:14px;align-items:end;margin-bottom:14px}#custom-artist-links .artist-link-row .field{flex:1}.artist-link-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}.artist-link-list a{overflow-wrap:anywhere}@media(max-width:600px){#custom-artist-links .artist-link-row{display:block}}
