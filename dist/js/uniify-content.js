@@ -1,5 +1,5 @@
 const startForm=document.querySelector('#starting-point');
-startForm.addEventListener('submit',event=>{event.preventDefault();const form=new FormData(startForm);try{localStorage.setItem('uniify-starting-point',JSON.stringify({artist:form.get('artist'),goal:form.get('goal'),time:form.get('time'),note:form.get('form_message')}));}catch{}location.href='workspace.html';});
+startForm.addEventListener('submit',event=>{event.preventDefault();const form=new FormData(startForm);try{localStorage.setItem('uniify-starting-point',JSON.stringify({artist:form.get('artist'),goal:form.get('goal'),time:form.get('time'),note:form.get('form_message')}));}catch{}location.href='/workspace';});
 const weekly=document.querySelector('#weekly-goal');weekly.addEventListener('submit',event=>{event.preventDefault();const input=weekly.querySelector('input');try{localStorage.setItem('uniify-weekly-goal',input.value);document.querySelector('#goal-status').textContent='Goal saved in this browser.';}catch{document.querySelector('#goal-status').textContent='Storage unavailable. Copy your goal to keep it.';}});
 try{weekly.querySelector('input').value=localStorage.getItem('uniify-weekly-goal')||'';}catch{}
 // Keep in-page navigation synchronized with the template's smooth-scroll engine.

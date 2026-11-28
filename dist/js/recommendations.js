@@ -2,12 +2,12 @@
 (function(root){
  const version=1;
  const foundations=[
- ['releasePlan','Release planning','Draft your release plan','Write one release goal and list preparation, delivery and follow-up actions.',60,'guide-release.html'],
- ['rights','Rights & credits','Document your rights and credits','List contributors, roles, ownership records and agreements to confirm.',45,'guide-credits.html'],
- ['branding','Artist identity','Review your artist identity','Compare artist name, biography, photographs and links across your public profiles. Update one mismatch.',30,'guide-routine.html'],
- ['audience','Audience','Choose an audience metric','Choose a platform and metric. Record its value and measurement period in Career Progress.',20,'guide-routine.html'],
- ['budgetPlan','Money','Build your music budget','Record your available budget and planned expenses. Keep free actions available when money is limited.',30,'guide-release.html'],
- ['goals','Career goals','Set a measurable career goal','Choose one outcome, a review date, and how you will measure it.',20,'guide-routine.html']];
+ ['releasePlan','Release planning','Draft your release plan','Write one release goal and list preparation, delivery and follow-up actions.',60,'/guide-release'],
+ ['rights','Rights & credits','Document your rights and credits','List contributors, roles, ownership records and agreements to confirm.',45,'/guide-credits'],
+ ['branding','Artist identity','Review your artist identity','Compare artist name, biography, photographs and links across your public profiles. Update one mismatch.',30,'/guide-routine'],
+ ['audience','Audience','Choose an audience metric','Choose a platform and metric. Record its value and measurement period in Career Progress.',20,'/guide-routine'],
+ ['budgetPlan','Money','Build your music budget','Record your available budget and planned expenses. Keep free actions available when money is limited.',30,'/guide-release'],
+ ['goals','Career goals','Set a measurable career goal','Choose one outcome, a review date, and how you will measure it.',20,'/guide-routine']];
  function suggest(s){const p=s.profile||{},a=s.answers||{},out=[],releases=s.releases||[],observations=s.observations||[];const small=p.hours==='1–3 hours';
  const add=(id,title,domain,steps,reason,effort,priority,dependencies=[],releaseId=null)=>out.push({id,title,domain,steps,reason,effort:small?Math.min(effort,30):effort,minutes:small?Math.min(effort,30):effort,priority,dependencies,releaseId,ruleVersion:version,generated:true,manager:true,archived:false,status:'To do',notes:'',due:'',dateMode:'auto',suggestedDate:'',order:999});
  for(const [id,domain,title,steps,effort,url] of foundations){if((id==='audience'&&p.goal==='Grow my audience')||!['no','partial'].includes(a[id])||(id==='releasePlan'&&releases.some(r=>r.status!=='Archived')))continue;let boost=(p.challenge==='Marketing and audience growth'&&['branding','audience'].includes(id))?25:0;add('foundation-'+id,title,domain,steps,`${domain}: you reported ${a[id]==='no'?'not yet in place':'partly in place'}.`+(boost?' Marketing is your stated challenge.':''),effort,60+boost+(a[id]==='no'?10:0));out.at(-1).url=url;}

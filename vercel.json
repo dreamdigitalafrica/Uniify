@@ -4,21 +4,12 @@
   "buildCommand": "",
   "installCommand": "",
   "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/home.html",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html"
-    }
-  ],
   "redirects": [
+    {
+      "source": "/:legacyHome(home|home\\.html)",
+      "destination": "/",
+      "permanent": true
+    },
     {
       "source": "/:path*",
       "has": [
@@ -33,17 +24,32 @@
   ],
   "headers": [
     {
-      "source": "/auth-callback.html",
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/:page(workspace|signin|signup|onboarding|verify-email|forgot-password|reset-password|auth-callback)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
+    },
+    {
+      "source": "/auth-callback",
       "headers": [
         {
           "key": "Referrer-Policy",
           "value": "no-referrer"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
         }
       ]
     }
-  ]
+  ],
+  "cleanUrls": true
 }
