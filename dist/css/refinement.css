@@ -85,3 +85,11 @@ html[data-appearance=dark] .uniify-landing .video-section .video-text,html[data-
 html[data-appearance=light] .uniify-landing .text2{color:#51465f}html[data-appearance=light] .uniify-landing .sub-title{color:#6335a4}
 /* Native FAQ triggers retain the template appearance without link navigation. */
 .uniify-landing .accordion-box .acc-btn{display:block;width:100%;background:transparent;border:0;text-align:left;font-family:inherit;color:var(--ink);cursor:pointer}.uniify-landing .accordion-box .acc-content[hidden]{display:none!important}.uniify-landing .accordion-box .acc-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-5px}.uniify-landing .accordion-box{overflow-anchor:none}
+
+/* Give FAQ copy the full panel width and keep controls at the far edge. */
+.uniify-landing #faq .accordion-box .block .acc-btn{display:flex;align-items:center;justify-content:space-between;gap:20px;line-height:1.3}
+.uniify-landing #faq .acc-btn .icon{flex:0 0 auto}
+.uniify-landing #faq .accordion-box .acc-content .content{padding-right:21px}
+.uniify-landing #faq .accordion-box .acc-content .content .text{width:100%;max-width:none;color:var(--ink);font-size:17px;line-height:1.6;text-align:justify;text-align-last:start;hyphens:auto;overflow-wrap:break-word}
+.uniify-landing #faq .acc-content.current{margin-top:16px}
+@media(max-width:767.98px){.uniify-landing #faq .accordion-box .block .acc-btn{gap:14px;font-size:17px}.uniify-landing #faq .accordion-box .acc-content .content{padding-right:12px}.uniify-landing #faq .accordion-box .acc-content .content .text{font-size:16px;line-height:1.55;text-align:left}.uniify-landing #faq .acc-content.current{margin-top:12px}}
