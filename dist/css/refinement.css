@@ -96,3 +96,7 @@ html[data-appearance=light] .uniify-landing .text2{color:#51465f}html[data-appea
 
 /* Vector card icons keep the original 60px footprint at every pixel density. */
 .uniify-landing #how-it-works .icon img{width:60px;height:60px;object-fit:contain;image-rendering:auto}
+
+/* A quiet, legible brand seal with upright type and the actual Uniify mark. */
+.uniify-landing #start .uniify-direction-badge{display:block;width:200px;height:200px;max-width:100%;object-fit:contain}
+.uniify-landing #how-it-works .service-block-seven .icon img{filter:none}
