@@ -1,0 +1,1 @@
+Vector paths extracted from the user-provided Task Manager Apps.fig. Original node geometry and strokes retained; colours inherit the Uniify palette. Grid reference: 428px canvas, 16px margins, 8px gutters.
