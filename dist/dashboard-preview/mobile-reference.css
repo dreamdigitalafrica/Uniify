@@ -131,3 +131,97 @@
 @media(max-width:650px){
  .greeting h1,.profile-title h1,.artist-bio,.artist-details strong,.activity-item h3,.profile-links-summary a span{overflow-wrap:anywhere}
 }
+
+/* The content owns scrolling. Header and navigation occupy separate grid rows. */
+@media (max-width: 650px) {
+  .workspace-shell {
+    --tab-bar-height: calc(72px + env(safe-area-inset-bottom));
+    --tile-violet: #c9b6ff;
+    --tile-blue: #a9d4ff;
+    --tile-pink: #f9c6e7;
+    --tile-mint: #a7e6d0;
+    --tile-lime: #e1ef9d;
+    --tile-ink: #242033;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    overflow: hidden;
+  }
+
+  .workspace-shell > .app-layout { min-height: 0; }
+  .workspace-shell .workspace {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+    height: 100%;
+  }
+  .workspace-shell .topbar {
+    position: relative;
+    height: calc(76px + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .workspace-shell .workspace-scroll {
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  .workspace-shell .workspace-scroll main { padding-bottom: 24px; }
+  .workspace-shell .bottom-nav {
+    position: relative;
+    inset: auto;
+    height: var(--tab-bar-height);
+    padding: 6px max(8px, env(safe-area-inset-right))
+      calc(6px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    background: var(--side);
+    box-shadow: none;
+  }
+  .workspace-shell .bottom-nav a { min-height: 56px; border-radius: 14px; }
+  .workspace-shell .bottom-nav a:nth-child(2) { --tab-color: var(--tile-blue); }
+  .workspace-shell .bottom-nav a:nth-child(3) { --tab-color: var(--tile-pink); }
+  .workspace-shell .bottom-nav a:nth-child(4) { --tab-color: var(--tile-mint); }
+  .workspace-shell .bottom-nav a:nth-child(5) { --tab-color: var(--tile-lime); }
+  .workspace-shell .bottom-nav a.active {
+    background: var(--tab-color, var(--tile-violet));
+    color: var(--tile-ink);
+  }
+  .workspace-shell .toast { bottom: calc(var(--tab-bar-height) + 12px); }
+
+  .workspace-shell .priorities > :nth-child(3n+1), .workspace-shell .stats > :nth-child(3n+1) {
+    --card-color: var(--tile-violet);
+  }
+  .workspace-shell .priorities > :nth-child(3n+2), .workspace-shell .stats > :nth-child(3n+2) {
+    --card-color: var(--tile-blue);
+  }
+  .workspace-shell .priorities > :nth-child(3n), .workspace-shell .stats > :nth-child(3n) {
+    --card-color: var(--tile-pink);
+  }
+  .workspace-shell .priority, .workspace-shell .stats > .stat {
+    background: color-mix(in srgb, var(--card-color, var(--tile-violet)) 12%, var(--raised));
+  }
+  .workspace-shell .priority-symbol {
+    background: var(--card-color, var(--tile-violet));
+    color: var(--tile-ink);
+  }
+  .workspace-shell .phase:nth-of-type(3n+2) { --phase-color: var(--tile-blue); }
+  .workspace-shell .phase:nth-of-type(3n) { --phase-color: var(--tile-mint); }
+  .workspace-shell .phase-dot {
+    background: var(--phase-color, var(--tile-violet));
+    color: var(--tile-ink);
+  }
+  .workspace-shell .compact-milestone {
+    background: color-mix(in srgb, var(--tile-mint) 10%, var(--surface));
+  }
+  .workspace-shell .week-card {
+    background: color-mix(in srgb, var(--tile-blue) 9%, var(--surface));
+  }
+  [data-theme=light] .workspace-shell :is(.priority, .stats > .stat) {
+    background: color-mix(in srgb, var(--card-color, var(--tile-violet)) 44%, var(--surface));
+  }
+}

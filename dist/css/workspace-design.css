@@ -225,3 +225,10 @@
 .studio-release-budget { display: flex; flex-wrap: wrap; gap: 16px 24px; margin: 16px 0; }
 .studio-more-releases { margin-top: 24px; }
 .studio-more-releases > h2 { margin-bottom: 12px; }
+
+@media (max-width: 650px) {
+  .management.workspace-shell .app-topbar { height: calc(76px + env(safe-area-inset-top)); }
+  .management.workspace-shell #view { padding-bottom: 24px; }
+  .management.workspace-shell .app-footer { margin: 0 16px; }
+  .management.workspace-shell #toast { bottom: calc(var(--tab-bar-height) + 12px); }
+}
