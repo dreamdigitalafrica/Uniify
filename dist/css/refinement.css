@@ -93,3 +93,6 @@ html[data-appearance=light] .uniify-landing .text2{color:#51465f}html[data-appea
 .uniify-landing #faq .accordion-box .acc-content .content .text{width:100%;max-width:none;color:var(--ink);font-size:17px;line-height:1.6;text-align:justify;text-align-last:start;hyphens:auto;overflow-wrap:break-word}
 .uniify-landing #faq .acc-content.current{margin-top:16px}
 @media(max-width:767.98px){.uniify-landing #faq .accordion-box .block .acc-btn{gap:14px;font-size:17px}.uniify-landing #faq .accordion-box .acc-content .content{padding-right:12px}.uniify-landing #faq .accordion-box .acc-content .content .text{font-size:16px;line-height:1.55;text-align:left}.uniify-landing #faq .acc-content.current{margin-top:12px}}
+
+/* Vector card icons keep the original 60px footprint at every pixel density. */
+.uniify-landing #how-it-works .icon img{width:60px;height:60px;object-fit:contain;image-rendering:auto}
