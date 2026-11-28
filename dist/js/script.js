@@ -1020,6 +1020,7 @@ var THEMEMASCOT = {};
   //Accordion Box
   if ($('.accordion-box').length) {
     $(".accordion-box").on('click', '.acc-btn', function () {
+      if (this.closest('[data-uniify-faq]')) return;
 
       var outerBox = $(this).parents('.accordion-box');
       var target = $(this).parents('.accordion');

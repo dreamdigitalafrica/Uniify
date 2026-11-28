@@ -83,3 +83,5 @@ html[data-appearance] .uniify-landing section .project-block .content .title,htm
 html[data-appearance=light] .uniify-landing .video-section .video-text,html[data-appearance=light] .uniify-landing .video-section .video-text *{color:#292332!important;-webkit-text-fill-color:#292332;opacity:1}
 html[data-appearance=dark] .uniify-landing .video-section .video-text,html[data-appearance=dark] .uniify-landing .video-section .video-text *{color:#f6f2fc!important;-webkit-text-fill-color:#f6f2fc;opacity:1}
 html[data-appearance=light] .uniify-landing .text2{color:#51465f}html[data-appearance=light] .uniify-landing .sub-title{color:#6335a4}
+/* Native FAQ triggers retain the template appearance without link navigation. */
+.uniify-landing .accordion-box .acc-btn{display:block;width:100%;background:transparent;border:0;text-align:left;font-family:inherit;color:var(--ink);cursor:pointer}.uniify-landing .accordion-box .acc-content[hidden]{display:none!important}.uniify-landing .accordion-box .acc-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-5px}.uniify-landing .accordion-box{overflow-anchor:none}
