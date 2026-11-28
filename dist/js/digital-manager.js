@@ -16,8 +16,8 @@ const managerNotice=scheduleNotice;scheduleNotice=function(){const history=state
 const managerSettings=settings;settings=function(){if(!window.uniifyCloud)return managerSettings();return header('Settings & data')+`<section class="panel"><h2>Private cloud workspace</h2><p>Your records sync to your account. Pending changes are retained on this device when a save fails. The save status is shown in the header.</p><div class="form-actions">${btn('Export workspace','export','download')}<button class="text-link" data-cloud-retry>Retry save</button></div></section>`};
 const managerProfile=profile;profile=function(){return managerProfile().replace('Saved only in this browser.',window.uniifyCloud?'Saved to your private cloud workspace.':'Saved on this device.')};
 document.addEventListener('click',e=>{if(e.target.closest('[data-manager-checkin]'))openDialog('Weekly check-in',`<form id="manager-checkin"><div class="fields"><label class="field full"><span>What moved forward?</span><textarea name="completed" maxlength="2000" required></textarea></label><label class="field full"><span>What got in the way?</span><textarea name="obstacle" maxlength="2000"></textarea></label>${select('Hours next week','hours',['1–3 hours','4–7 hours','8–15 hours','16+ hours'],state.profile.hours)}</div><button class="theme-btn-two">Save check-in</button></form>`);if(e.target.closest('[data-cloud-retry]'))window.uniifyCloud?.flush();});
-if(!state.history.length&&!state.releases.length&&!location.hash)location.hash='assessment';
-save();render();
+if(!window.uniifyCloud&&!state.history.length&&!state.releases.length&&!location.hash)location.hash='assessment';
+if (!window.uniifyWorkspaceBooting) {save();render();}
 
 /* Artist-owned links share the profile's existing cloud/local persistence. */
 (()=>{
@@ -30,7 +30,7 @@ profile=function(){return originalProfile()+section()};settings=function(){retur
 document.addEventListener('change',e=>{if(e.target.matches('[data-platform-picker]')&&e.target.value){const name=e.target.value;e.target.closest('form').querySelector('.fields').insertAdjacentHTML('beforeend',row(name));e.target.selectedOptions[0].remove();e.target.value='';}});
 document.addEventListener('click',e=>{if(e.target.closest('[data-add-link]')){const holder=document.querySelector('#custom-artist-links');if(holder.children.length>=20){toast('You can add up to 20 other links.');return}holder.insertAdjacentHTML('beforeend',row('','',true));holder.lastElementChild.querySelector('input').focus()}if(e.target.closest('[data-remove-link]'))e.target.closest('[data-link-row]').remove()});
 document.addEventListener('submit',e=>{if(e.target.id!=='artist-links-form')return;e.preventDefault();const links=[];for(const r of e.target.querySelectorAll('[data-link-row]')){const label=r.querySelector('[name=link-label]').value.trim(),raw=r.querySelector('[name=link-url]').value.trim();if(!raw)continue;const url=safeURL(raw);if(!url||!label||label.length>60||raw.length>2048){e.target.querySelector('[data-links-status]').textContent='Use a name and a valid http:// or https:// link for each entry.';return}links.push({label,url})}state.profile.links=links;save('Artist links saved.');render()},true);
-render();
+if (!window.uniifyWorkspaceBooting) render();
 })();
 
 /* Compact workspace controls and editable artist imagery. */
@@ -45,5 +45,5 @@ if(e.target.closest('[data-edit-cover]'))openDialog('Cover photo',`<div class="c
 if(e.target.closest('[data-remove-cover]')){delete state.profile.cover;save('Cover removed.');closeDialog();render();}
 if(e.target.closest('[data-logout]')){e.preventDefault();const signout=document.querySelector('#account-links [data-signout]');if(signout)signout.click();else location.href='/signin';}});
 document.addEventListener('change',async e=>{if(e.target.id!=='cover-photo')return;const file=e.target.files[0];if(!file)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10*1024*1024){toast('Choose a JPG, PNG or WebP under 10 MB.');return}try{const bitmap=await createImageBitmap(file),canvas=document.createElement('canvas');canvas.width=1200;canvas.height=450;const scale=Math.max(1200/bitmap.width,450/bitmap.height),width=bitmap.width*scale,height=bitmap.height*scale;canvas.getContext('2d').drawImage(bitmap,(1200-width)/2,(450-height)/2,width,height);state.profile.cover=canvas.toDataURL('image/jpeg',.8);bitmap.close();save('Cover updated.');closeDialog();render()}catch{toast('This image could not be opened.')}});
-render();
+if (!window.uniifyWorkspaceBooting) render();
 })();

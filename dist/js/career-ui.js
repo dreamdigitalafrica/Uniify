@@ -49,4 +49,4 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-action="confirm
 // Preserve legacy records while adding usable release plans. Do not infer historical completion dates.
 for(const release of state.releases)E.seed(state,release);
 if(state.tasks.some(t=>t.releaseId&&!t.suggestedDate))adapt('Existing releases connected to their roadmaps; historical records preserved');
-save();render();
+if (!window.uniifyWorkspaceBooting) {save();render();}

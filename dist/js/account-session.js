@@ -1,5 +1,10 @@
 /* Cloud is authoritative for accounts; demo data stays separate. */
 (async()=>{
+ const loading=document.querySelector('#workspace-loading');
+ const reveal=()=>{
+  document.body.removeAttribute('data-workspace-loading');
+  loading?.remove();
+ };
  const demo=new URLSearchParams(location.search).get('demo')==='1';
  try{
   if(demo){window.uniifyStorageKey='uniify-workspace-v2';}
@@ -19,8 +24,9 @@
     const p=document.createElement('p');p.textContent=`${candidate.profile?.artist||'Artist'} · ${candidate.tasks?.length||0} tasks · ${candidate.releases?.length||0} releases · ${candidate.entries?.length||0} financial entries. ${cloud.data?'A cloud copy also exists. Export local changes before choosing the cloud copy.':'Your existing records will be retained.'}`;section.append(p);
     const download=document.createElement('button');download.className='text-link';download.textContent='Export device copy';download.onclick=()=>downloadData(candidate);section.append(download);
     const useLocal=document.createElement('button');useLocal.className='theme-btn-two';useLocal.textContent=pending&&pending.revision!==revision?'Keep changes for review':'Import and continue';useLocal.disabled=!!(cloud.data&&pending?.revision!==revision);section.append(useLocal);
-    const useCloud=document.createElement('button');useCloud.className='text-link';useCloud.textContent=cloud.data?'Use latest cloud copy':'Start a new cloud workspace';section.append(useCloud);document.querySelector('#view').append(section);
+    const useCloud=document.createElement('button');useCloud.className='text-link';useCloud.textContent=cloud.data?'Use latest cloud copy':'Start a new cloud workspace';section.append(useCloud);if(loading){loading.removeAttribute('role');loading.replaceChildren(section)}else document.querySelector('#view').append(section);
     initial=await new Promise(resolve=>{useLocal.onclick=()=>{resolve(candidate);section.remove()};useCloud.onclick=()=>{localStorage.removeItem(pendingKey);resolve(initial);section.remove()}});
+    if(loading){loading.setAttribute('role','status');loading.textContent='Opening your workspace…'}
    }
    window.uniifyInitialState=initial;
    let queued=null,inFlight=null,conflict=false,last=JSON.stringify(cloud.data),timer;
@@ -39,6 +45,20 @@
    const signout=document.createElement('button');signout.className='text-link';signout.dataset.signout='';signout.hidden=true;signout.textContent='Sign out';signout.onclick=async()=>{signout.disabled=true;try{if(!await flush())throw Error('Save or export pending changes before signing out.');await request('/api/auth/signout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});localStorage.removeItem(key);sessionStorage.removeItem('uniify-onboarding-draft');location.replace('/signin');}catch(e){status(e.message,true);alert(e.message);signout.disabled=false;}};document.querySelector('#account-links').append(signout);
    document.querySelector('.app-footer > span:nth-of-type(2)').textContent='Private workspace · Cloud sync';
   }
-  for(const src of ['career-engine.js','recommendations.js','management.js','career-ui.js','workspace-refinement.js','digital-manager.js','workspace-design.js'])await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='js/'+src;script.onload=resolve;script.onerror=reject;document.body.append(script)});
- }catch(error){if(error.status===401||error.status===403){location.replace('/signin');return;}const view=document.querySelector('#view');view.textContent='Unable to open your workspace. '+error.message+' ';const retry=document.createElement('a');retry.href=location.href;retry.textContent='Try again';view.append(retry);}
+  window.uniifyWorkspaceBooting=true;
+  const scripts=['career-engine','recommendations','management','career-ui','workspace-refinement','digital-manager','workspace-design'];
+  await Promise.all(scripts.map(name=>new Promise((resolve,reject)=>{
+   const script=document.createElement('script');
+   script.async=false;
+   script.src='/js/'+name+'.js';
+   script.onload=resolve;
+   script.onerror=()=>reject(Error('Workspace files could not be loaded.'));
+   document.body.append(script);
+  })));
+  if (!document.querySelector('.studio-bottom-nav')) throw Error('Workspace interface could not be initialized.');
+  window.uniifyWorkspaceBooting=false;
+  save();
+  render();
+  reveal();
+ }catch(error){if(error.status===401||error.status===403){location.replace('/signin');return;}const view=document.querySelector('#view');view.textContent='Unable to open your workspace. '+error.message+' ';const retry=document.createElement('a');retry.href=location.href;retry.textContent='Try again';view.append(retry);reveal();}
 })();
